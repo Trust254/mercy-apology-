@@ -1,279 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#173b2b">
-  <meta name="description" content="A sincere love story, apology, and message of appreciation for Mercy.">
-  <title>For Mercy — A Story From My Heart</title>
-  <style>
-    :root {
-      --forest: #173b2b;
-      --forest-light: #24533d;
-      --gold: #d6b36a;
-      --cream: #fffaf0;
-      --rose: #f5e5df;
-      --ink: #26342d;
-      --muted: #6c766f;
-      --white: #fff;
-      --shadow: 0 18px 55px rgba(23, 59, 43, .12);
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      background: var(--cream);
-      color: var(--ink);
-      line-height: 1.7;
-    }
-    a { color: inherit; }
-    .topbar {
-      position: sticky; top: 0; z-index: 5;
-      background: rgba(23, 59, 43, .96); color: var(--white);
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 13px clamp(18px, 5vw, 70px); gap: 14px;
-      backdrop-filter: blur(10px);
-    }
-    .brand { letter-spacing: .12em; text-transform: uppercase; font: 700 12px Arial, sans-serif; }
-    .topbar a { text-decoration: none; font: 600 13px Arial, sans-serif; }
-    .hero {
-      min-height: 86vh; display: grid; place-items: center; text-align: center;
-      padding: 80px 22px; color: var(--white);
-      background:
-        radial-gradient(ellipse at 50% 20%, rgba(214,179,106,.25), transparent 40%),
-        linear-gradient(145deg, #102a20, #24533d 58%, #173b2b);
-      position: relative; overflow: hidden;
-    }
-    .hero::before, .hero::after {
-      content: "♡"; position: absolute; color: rgba(255,255,255,.08);
-      font-size: clamp(180px, 30vw, 390px); line-height: 1;
-    }
-    .hero::before { left: -60px; bottom: -95px; transform: rotate(-16deg); }
-    .hero::after { right: -55px; top: -110px; transform: rotate(14deg); }
-    .hero-inner { position: relative; z-index: 1; max-width: 820px; }
-    .eyebrow { color: var(--gold); letter-spacing: .25em; text-transform: uppercase; font: 700 11px Arial, sans-serif; }
-    h1 { font-size: clamp(48px, 9vw, 94px); line-height: 1.02; margin: 18px 0; font-weight: 500; }
-    .hero p { font-size: clamp(17px, 2.3vw, 22px); max-width: 660px; margin: 0 auto 28px; color: #f4f0e6; }
-    .button {
-      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
-      padding: 13px 22px; border-radius: 999px; border: 1px solid transparent;
-      text-decoration: none; font: 700 13px Arial, sans-serif; transition: .2s ease;
-      cursor: pointer;
-    }
-    .button-gold { background: var(--gold); color: #1e3024; }
-    .button-outline { border-color: rgba(255,255,255,.6); color: var(--white); margin-left: 8px; }
-    .button:hover { transform: translateY(-2px); }
-    main { width: min(1050px, calc(100% - 36px)); margin: auto; }
-    section { padding: 76px 0; }
-    .section-head { text-align: center; max-width: 700px; margin: 0 auto 34px; }
-    .section-head h2 { color: var(--forest); font-size: clamp(30px, 5vw, 45px); font-weight: 500; line-height: 1.15; margin: 8px 0 12px; }
-    .section-head p { color: var(--muted); margin: 0; }
-    .kicker { color: #9a7835; letter-spacing: .2em; text-transform: uppercase; font: 700 11px Arial, sans-serif; }
-    .story-card {
-      background: var(--white); border: 1px solid #eee5d4; border-radius: 24px;
-      padding: clamp(24px, 5vw, 54px); box-shadow: var(--shadow);
-      max-width: 850px; margin: auto;
-    }
-    .story-card p { font-size: 18px; margin: 0 0 19px; }
-    .story-card p:last-child { margin-bottom: 0; }
-    .signature { color: var(--forest); font-style: italic; font-size: 22px !important; margin-top: 30px !important; }
-    .qualities { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
-    .quality { background: #f4ede0; border-radius: 18px; padding: 22px 14px; text-align: center; }
-    .quality .symbol { font-size: 26px; display: block; margin-bottom: 8px; }
-    .quality strong { color: var(--forest); display: block; font-size: 17px; }
-    .quality span { color: var(--muted); font: 12px Arial, sans-serif; }
-    .apology { background: var(--rose); width: 100vw; margin-left: calc((1050px - 100vw) / 2); padding: 72px max(24px, calc((100vw - 850px) / 2)); }
-    .apology-inner { max-width: 850px; margin: auto; }
-    .apology h2 { font-size: clamp(32px, 5vw, 48px); line-height: 1.1; color: #713f3b; font-weight: 500; }
-    .apology p { font-size: 18px; }
-    .promise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; }
-    .promise { border-top: 2px solid var(--gold); padding: 18px 4px 0; }
-    .promise strong { color: var(--forest); display: block; margin-bottom: 7px; }
-    .promise span { color: var(--muted); font-size: 15px; }
-    .quote {
-      text-align: center; padding: 50px 20px; color: var(--white);
-      background: var(--forest); border-radius: 24px; margin: 0 auto;
-    }
-    .quote blockquote { font-size: clamp(23px, 4vw, 36px); line-height: 1.35; max-width: 760px; margin: 0 auto 14px; }
-    .quote span { color: var(--gold); font: 700 11px Arial, sans-serif; letter-spacing: .18em; text-transform: uppercase; }
-    .response-box { background: var(--white); border-radius: 24px; padding: clamp(24px, 5vw, 46px); box-shadow: var(--shadow); max-width: 760px; margin: auto; }
-    label { display: block; font: 700 12px Arial, sans-serif; color: var(--forest); margin: 18px 0 7px; }
-    input, select, textarea {
-      width: 100%; padding: 13px 14px; border: 1px solid #d9ded7; border-radius: 12px;
-      background: #fffdf8; color: var(--ink); font: 15px Arial, sans-serif;
-    }
-    textarea { min-height: 125px; resize: vertical; }
-    input:focus, select:focus, textarea:focus { outline: 2px solid #d6b36a; border-color: transparent; }
-    .form-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-    .button-green { background: var(--forest); color: var(--white); }
-    .button-soft { background: #f2ead9; color: var(--forest); }
-    .small-note { font: 12px/1.6 Arial, sans-serif; color: var(--muted); margin-top: 15px; }
-    footer { text-align: center; padding: 34px 20px 45px; color: var(--muted); font: 12px Arial, sans-serif; }
-    footer strong { color: var(--forest); }
-    .heart { color: #c47b73; }
-    @media (max-width: 700px) {
-      .topbar { padding: 12px 16px; }
-      .topbar a { font-size: 11px; }
-      .hero { min-height: 78vh; }
-      .button-outline { margin: 10px 0 0; }
-      .qualities { grid-template-columns: repeat(2, 1fr); }
-      .promise-grid { grid-template-columns: 1fr; gap: 22px; }
-      .apology { margin-left: calc((100% - 100vw) / 2); }
-      section { padding: 58px 0; }
-      .story-card p, .apology p { font-size: 16px; }
-    }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#25151d">
+<meta name="description" content="A heartfelt story and sincere apology for Mercy.">
+<title>Mercy — The Things I Should Have Said</title>
+<style>
+:root{--night:#25151d;--wine:#5a2438;--rose:#e9b8b8;--paper:#fff8f3;--ink:#35252a;--muted:#79676b;--line:#ead8d4;--gold:#d8b27a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.75}
+a{color:inherit}.nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:24px clamp(18px,6vw,76px);color:#fff}
+.logo{font:700 11px Arial,sans-serif;letter-spacing:.24em;text-transform:uppercase}.nav a{text-decoration:none;font-size:12px;border-bottom:1px solid #ffffff80;padding-bottom:3px}
+.hero{min-height:94vh;display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(125deg,rgba(37,21,29,.97),rgba(90,36,56,.87)),radial-gradient(circle at 75% 35%,#b56a79,transparent 38%);color:#fff;padding:120px 8vw 90px}
+.hero:before{content:"M";position:absolute;right:3vw;bottom:-.33em;font-family:Georgia,serif;font-size:clamp(300px,58vw,760px);line-height:1;color:#ffffff08;pointer-events:none}
+.hero-inner{max-width:850px;position:relative}.eyebrow{color:var(--rose);font-size:10px;letter-spacing:.3em;text-transform:uppercase;font-weight:bold}
+h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(58px,10vw,126px);line-height:.95;letter-spacing:-.055em;margin:25px 0}
+.hero p{max-width:540px;color:#f2e3e5;font:17px/1.8 Georgia,serif}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}.btn{display:inline-block;padding:13px 21px;border-radius:3px;text-decoration:none;font-size:11px;font-weight:bold;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:1px solid transparent;transition:transform .2s}.btn:hover{transform:translateY(-2px)}.btn-light{background:var(--rose);color:var(--night)}.btn-line{border-color:#ffffff80;color:#fff}
+.scroll-note{position:absolute;bottom:25px;left:8vw;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#d9c4ca}
+main{max-width:1050px;margin:auto;padding:0 26px}.intro{display:grid;grid-template-columns:.7fr 1.3fr;gap:65px;padding:105px 0 85px;align-items:start}
+.side-label{font-size:10px;text-transform:uppercase;letter-spacing:.22em;color:var(--wine);font-weight:bold}.side-label span{display:block;color:#b18a8e;margin-top:9px}
+h2{font:400 clamp(34px,5vw,55px)/1.12 Georgia,serif;letter-spacing:-.03em;color:var(--wine);margin:13px 0 23px}
+.copy p{font:17px/1.9 Georgia,serif;margin:0 0 20px}.dropcap:first-letter{float:left;font:70px/.8 Georgia,serif;color:#a75a6e;padding:8px 10px 0 0}
+.divider{width:54px;height:2px;background:var(--gold);margin:26px 0}
+.ribbon{background:#f1e2df;margin:0 calc((1050px - 100vw)/2);padding:70px max(26px,calc((100vw - 900px)/2))}
+.ribbon-inner{max-width:900px;margin:auto}.ribbon h2{max-width:680px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:35px}
+.card{background:#fffaf7;border:1px solid #e7d2d0;padding:23px 20px;min-height:160px}
+.card .num{font:italic 27px Georgia,serif;color:#b36f7b}.card h3{font:400 21px Georgia,serif;color:var(--wine);margin:8px 0}.card p{font-size:13px;color:var(--muted);margin:0;line-height:1.7}
+.timeline{padding:90px 0}.timeline-head{max-width:650px;margin-bottom:35px}.step{display:grid;grid-template-columns:90px 1fr;gap:22px;padding:24px 0;border-top:1px solid var(--line)}.step:last-child{border-bottom:1px solid var(--line)}.step-num{font:italic 25px Georgia,serif;color:#b36f7b}.step h3{font:400 24px Georgia,serif;color:var(--wine);margin:0 0 7px}.step p{margin:0;color:#66565a;max-width:720px}
+.quote{background:var(--night);color:#fff;text-align:center;padding:70px 25px;margin:0 calc((1050px - 100vw)/2)}.quote blockquote{font:clamp(25px,4vw,42px)/1.35 Georgia,serif;max-width:800px;margin:0 auto 20px}.quote small{color:var(--rose);text-transform:uppercase;letter-spacing:.22em;font-size:10px}
+.reply{padding:95px 0}.reply-head{text-align:center;max-width:680px;margin:0 auto 35px}.reply-head p{color:var(--muted)}.formbox{max-width:730px;margin:auto;background:#fff;border:1px solid var(--line);padding:clamp(22px,5vw,46px);box-shadow:0 20px 55px #43212b0b}
+label{display:block;margin:18px 0 7px;color:var(--wine);font-size:11px;font-weight:bold;letter-spacing:.06em;text-transform:uppercase}
+select,textarea{width:100%;border:1px solid #e3d4d1;border-radius:2px;background:#fffdfb;padding:14px;color:var(--ink);font:15px Arial,sans-serif}textarea{min-height:125px;resize:vertical}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.btn-dark{background:var(--wine);color:#fff}.btn-soft{background:#f3e8e5;color:var(--wine)}
+.note{font-size:11px;color:var(--muted);line-height:1.65;margin-top:17px}
+footer{background:#1d1117;color:#cdbbc1;padding:35px 20px;text-align:center;font-size:11px;letter-spacing:.04em}footer strong{color:var(--rose)}
+@media(max-width:700px){.hero{min-height:82vh;padding-left:25px;padding-right:25px}.scroll-note{left:25px}.intro{grid-template-columns:1fr;gap:18px;padding:70px 0}.cards{grid-template-columns:1fr}.ribbon{margin-left:-26px;margin-right:-26px;padding:60px 26px}.step{grid-template-columns:50px 1fr;gap:10px}.timeline{padding:70px 0}.quote{margin-left:-26px;margin-right:-26px}.reply{padding:70px 0}.nav{padding:20px 22px}.nav a{font-size:11px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
 </head>
 <body>
-  <nav class="topbar" aria-label="Main navigation">
-    <div class="brand">A Letter for Mercy</div>
-    <a href="#her-side">Her side matters <span aria-hidden="true">♡</span></a>
-  </nav>
-
-  <header class="hero">
-    <div class="hero-inner">
-      <div class="eyebrow">A sincere story • From my heart</div>
-      <h1>For Mercy,<br>with honesty.</h1>
-      <p>Some people become special not because everything goes perfectly, but because of the kindness, laughter, and little moments they bring into our lives.</p>
-      <a class="button button-gold" href="#our-story">Read our story <span aria-hidden="true">↓</span></a>
-      <a class="button button-outline" href="#apology">My apology</a>
-    </div>
-  </header>
-
-  <main>
-    <section id="our-story">
-      <div class="section-head">
-        <div class="kicker">Chapter one</div>
-        <h2>The little moments that stayed with me</h2>
-        <p>This isn't a demand for an answer. It's my way of saying what I should have communicated better.</p>
-      </div>
-      <article class="story-card">
-        <p>Dear Mercy,</p>
-        <p>When I think about you, I remember a kind, beautiful, humble, playful, and hardworking woman. I admire your determination and the hunger you have to build a better life. Those qualities are what drew me to you—not just your beauty, but the person you are.</p>
-        <p>When we were communicating more easily while you were in Kenya, the small moments we shared meant a lot to me. They may have looked ordinary from the outside, but to me they were meaningful. You became the woman I cared for most, and those memories have stayed with me.</p>
-        <p>I also want you to understand a situation that may have caused doubt. Your friend once asked me to take some photos for her. There was nothing romantic or casual between us. But I understand that the way I handled things, and the way I communicated—or failed to communicate—may have made the situation look different. I should have been clearer, more considerate, and more careful with your feelings.</p>
-        <p>I told my family about you because I was serious about getting to know you. They became familiar with you through what I shared, and they have asked how you are doing. That is my choice and my responsibility; it should never become pressure on you or an expectation you must fulfil.</p>
-        <p>Since we are both working here in Qatar, life can be demanding, and distance can make communication harder. I have missed the chance to talk with you properly in person. When my calls have not connected, I have sometimes been left unsure how you feel. I don't want to guess your reasons or decide your feelings for you. I would rather listen to your side, if and when you feel comfortable sharing it.</p>
-        <p>I bought you a watch and necklaces some months ago because I wanted to give you something thoughtful. Those gifts were meant as gestures of care, not a price for your time, affection, or a meeting. You owe me nothing because of them. What matters most to me is honesty, mutual respect, and the chance to communicate openly.</p>
-        <p>I am not writing this to compare myself with other men or to make promises just to impress you. I can only speak for myself: I want to be truthful with you, show care through my actions, and improve the communication that I know I neglected.</p>
-        <p class="signature">With respect and a sincere heart,</p>
-        <p><strong>Someone who cares about you, Mercy.</strong></p>
-      </article>
-      <div class="qualities" aria-label="Qualities I appreciate in Mercy">
-        <div class="quality"><span class="symbol" aria-hidden="true">♡</span><strong>Kind</strong><span>Your considerate heart</span></div>
-        <div class="quality"><span class="symbol" aria-hidden="true">✦</span><strong>Humble</strong><span>The way you carry yourself</span></div>
-        <div class="quality"><span class="symbol" aria-hidden="true">☀</span><strong>Playful</strong><span>Your light and laughter</span></div>
-        <div class="quality"><span class="symbol" aria-hidden="true">❋</span><strong>Hardworking</strong><span>Your determination</span></div>
-      </div>
-    </section>
-
-    <section id="apology" class="apology">
-      <div class="apology-inner">
-        <div class="kicker">Chapter two</div>
-        <h2>I'm sorry for the ways I let you down.</h2>
-        <p>Mercy, I take responsibility for my part. My communication was not good enough, and my behaviour around a situation involving your friend may have made you uncomfortable or caused you to question my intentions. Even if I did not mean to hurt you, I recognise that my actions may still have hurt you.</p>
-        <p>I'm sorry for not explaining things clearly, for not giving reassurance when it mattered, and for allowing silence and misunderstanding to grow between us. I should have handled things with more maturity. I can't change the past by writing a beautiful page, but I can learn from it and behave better.</p>
-        <p>I care about you, but I also respect your freedom to decide what you want. You do not have to forgive me quickly, meet me, or return my feelings because I have apologised. If your feelings have changed, I would rather hear the truth kindly than keep guessing.</p>
-        <div class="promise-grid">
-          <div class="promise"><strong>Clearer communication</strong><span>I will aim to speak honestly instead of leaving room for confusion.</span></div>
-          <div class="promise"><strong>Respect, not pressure</strong><span>I will respect your time, your boundaries, and your decision.</span></div>
-          <div class="promise"><strong>Actions over gifts</strong><span>I know trust is built through consistent behaviour, not presents or promises.</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="quote">
-        <blockquote>“I don't want gifts to speak for me. I want my honesty, respect, and actions to tell you who I am.”</blockquote>
-        <span>A promise to do better</span>
-      </div>
-    </section>
-
-    <section id="headlines">
-      <div class="section-head">
-        <div class="kicker">A few words for you</div>
-        <h2>Little headlines from my heart</h2>
-        <p>Choose any line that says what you feel. Each one is a small chapter in this story.</p>
-      </div>
-      <div class="story-card">
-        <p><strong>01 — The Woman Behind the Beauty</strong><br>I admire your kindness, humility, playfulness, and hardworking spirit. Those are the qualities that made you special to me.</p>
-        <p><strong>02 — An Apology I Owe You</strong><br>I should have communicated better and handled misunderstandings with more maturity. I'm sorry for my part.</p>
-        <p><strong>03 — The Gifts Were Never a Debt</strong><br>The watch and necklaces were given with care, never to buy your attention or make you feel you owe me anything.</p>
-        <p><strong>04 — My Family Knows About You</strong><br>I spoke about you because I was serious. Still, my family's hopes are not a burden you have to carry; your choice is yours.</p>
-        <p><strong>05 — I Would Rather Listen Than Assume</strong><br>I don't know everything you feel or what has made communication difficult. If you want to tell me your side, I am ready to listen without arguing.</p>
-        <p><strong>06 — If We Try Again, Let It Be Honest</strong><br>No pressure and no perfect promises—just mutual respect, clear communication, and effort from both sides.</p>
-      </div>
-    </section>
-
-    <section id="her-side">
-      <div class="section-head">
-        <div class="kicker">Chapter three</div>
-        <h2>Mercy, your side matters too.</h2>
-        <p>If you choose to share your feelings, this space is for your honest words—not the answer you think I want to hear.</p>
-      </div>
-      <div class="response-box">
-        <form id="replyForm">
-          <label for="feeling">How do you feel about us?</label>
-          <select id="feeling" name="feeling">
-            <option value="I still care and would like us to communicate better.">I still care, and I'd like us to communicate better.</option>
-            <option value="I am hurt and need you to understand my side.">I'm hurt and need you to understand my side.</option>
-            <option value="I need time and space to think.">I need time and space to think.</option>
-            <option value="I would prefer to be friends.">I'd prefer to be friends.</option>
-            <option value="My feelings have changed, and I want to be honest.">My feelings have changed, and I want to be honest.</option>
-            <option value="I would rather share my own words.">I'd rather share my own words.</option>
-          </select>
-          <label for="message">Anything you want me to understand (optional)</label>
-          <textarea id="message" name="message" placeholder="Share only what you're comfortable sharing..."></textarea>
-          <div class="form-actions">
-            <button class="button button-green" type="submit">Share your side on WhatsApp ↗</button>
-            <button class="button button-soft" type="button" id="clearForm">Clear my answers</button>
-          </div>
-          <p class="small-note">This form does not send anything automatically or store your response on this website. When you press the WhatsApp button, it opens WhatsApp with a message you can review and choose whether to send. You can also contact me directly—or choose not to respond. I will respect that.</p>
-        </form>
-      </div>
-    </section>
-
-    <section>
-      <div class="section-head">
-        <div class="kicker">One last thing</div>
-        <h2>No pressure. Just the truth.</h2>
-      </div>
-      <div class="story-card">
-        <p>Mercy, I cannot prove my intentions by asking you to believe every word on this page. Trust, if it can be rebuilt, has to grow naturally through what I do over time. I am sorry for my mistakes, grateful for the good moments we shared, and willing to hear your truth—even if it is not the answer I hope for.</p>
-        <p>You deserve kindness, honesty, and peace. Whatever you decide, I hope we can treat each other with respect.</p>
-        <p class="signature">Thank you for reading, Mercy. <span class="heart">♡</span></p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    Made with sincerity for <strong>Mercy</strong> <span class="heart">♡</span><br>
-    <span style="display:block;margin-top:8px">Love should be freely chosen, never pressured.</span>
-  </footer>
-
-  <script>
-    const form = document.getElementById('replyForm');
-    const feeling = document.getElementById('feeling');
-    const message = document.getElementById('message');
-    const phoneNumber = '97451231379';
-
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-      const selectedFeeling = feeling.value;
-      const personalMessage = message.value.trim();
-      let text = 'Hi, I read your page for me. I want to share my side honestly.\\n\\n' + selectedFeeling;
-      if (personalMessage) text += '\\n\\nWhat I want you to understand: ' + personalMessage;
-      text += '\\n\\nPlease listen to my feelings respectfully.';
-      const url = 'https://wa.me/' + phoneNumber + '?text=' + encodeURIComponent(text);
-      window.open(url, '_blank', 'noopener,noreferrer');
-    });
-
-    document.getElementById('clearForm').addEventListener('click', function () {
-      form.reset();
-      message.focus();
-    });
-  </script>
+<nav class="nav"><div class="logo">A letter for Mercy</div><a href="#her-voice">Her voice matters ↗</a></nav>
+<header class="hero">
+ <div class="hero-inner">
+  <div class="eyebrow">Some words deserve to be said properly</div>
+  <h1>Mercy,<br>this is from<br>my heart.</h1>
+  <p>Not a perfect love story. Just an honest one—with good memories, mistakes I own, and feelings I want to express with respect.</p>
+  <div class="ctas"><a class="btn btn-light" href="#story">Read the letter ↓</a><a class="btn btn-line" href="#apology">The apology</a></div>
+ </div>
+ <div class="scroll-note">A story in three chapters · ♡</div>
+</header>
+<main>
+<section class="intro" id="story">
+ <div><div class="side-label">Chapter 01 <span>The woman I came to admire</span></div><h2>It was more than beauty.</h2><div class="divider"></div></div>
+ <article class="copy">
+  <p class="dropcap">Dear Mercy, when I think about you, I remember a beautiful and kind woman with a humble heart, a playful spirit, and a hardworking nature. I admire your determination and the way you keep pushing forward. Those are the qualities that made you special to me.</p>
+  <p>The little moments we shared and the conversations we had when you were in Kenya meant something to me. They did not need to be grand to matter. You became the woman I cared for most, and I still value those memories.</p>
+  <p>I told my family about you because I was serious about getting to know you. They sometimes ask how you are doing, but I want you to know that their hopes are not a responsibility you must carry. Your feelings and your choice matter most.</p>
+  <p>Since we are both working in Qatar, life can be busy and communication can become difficult. I have missed the chance to sit down and speak with you properly. When I could not reach you, I felt uncertain, but I do not want to guess your reasons or speak for your heart. I would rather listen to your side.</p>
+ </article>
+</section>
+<section class="ribbon" id="apology">
+ <div class="ribbon-inner">
+  <div class="side-label">Chapter 02 · Taking responsibility</div>
+  <h2>Where I went wrong, I want to own it.</h2>
+  <p>I know my communication was not good enough. I also understand that the situation involving your friend may have created doubt. She asked me to take some photos, and there was nothing romantic between us—but I should have communicated clearly and considered how it might look and feel to you. I am sorry for the confusion and for my part in letting trust become uncertain.</p>
+  <p>I cannot undo mistakes with a page on a website. I can only acknowledge them, learn, and show more maturity through my actions. I am sorry, Mercy.</p>
+  <div class="cards">
+   <article class="card"><div class="num">01</div><h3>Clear words</h3><p>I should have explained things honestly instead of leaving space for misunderstanding.</p></article>
+   <article class="card"><div class="num">02</div><h3>Care without pressure</h3><p>Your time, boundaries, and decision deserve respect, whatever you choose.</p></article>
+   <article class="card"><div class="num">03</div><h3>Actions over gifts</h3><p>The watch and necklaces were thoughtful gifts, not a reason you owe me attention or a meeting.</p></article>
+  </div>
+ </div>
+</section>
+<section class="timeline">
+ <div class="timeline-head"><div class="side-label">Chapter 03 · What I hope you understand</div><h2>Six things I should say plainly.</h2><p>Not grand promises—just honest thoughts.</p></div>
+ <div class="step"><div class="step-num">01.</div><div><h3>I value who you are.</h3><p>Your kindness, humility, humour, and hard work matter to me. My feelings are not just about your appearance.</p></div></div>
+ <div class="step"><div class="step-num">02.</div><div><h3>I am sorry for poor communication.</h3><p>I should have made my intentions clearer and handled sensitive moments with more care.</p></div></div>
+ <div class="step"><div class="step-num">03.</div><div><h3>My gifts came without conditions.</h3><p>I bought the watch and necklaces because I wanted to. They are not a debt, and you owe me nothing for them.</p></div></div>
+ <div class="step"><div class="step-num">04.</div><div><h3>I won't compare myself with other men.</h3><p>I can only be honest about my own intentions and try to show care through consistent behaviour.</p></div></div>
+ <div class="step"><div class="step-num">05.</div><div><h3>I want to hear your truth.</h3><p>If I hurt you or you see things differently, I am willing to listen without turning your feelings into an argument.</p></div></div>
+ <div class="step"><div class="step-num">06.</div><div><h3>Your choice is yours.</h3><p>You do not have to forgive me quickly or return my feelings. I want any next step to be mutual and freely chosen.</p></div></div>
+</section>
+<section class="quote"><blockquote>“I don't want a gift to speak for me. I want honesty, respect, and my actions to show you the person I am.”</blockquote><small>With sincerity, for Mercy</small></section>
+<section class="reply" id="her-voice">
+ <div class="reply-head"><div class="side-label">Your words matter</div><h2>Mercy, I want to hear your side.</h2><p>If you feel comfortable, share what is in your heart. There is no wrong answer, and no pressure to reply.</p></div>
+ <div class="formbox">
+  <form id="replyForm">
+   <label for="feeling">What would you like me to understand?</label>
+   <select id="feeling">
+    <option>I still care and want us to communicate better.</option>
+    <option>I am hurt and need you to understand my side.</option>
+    <option>I need time and space to think.</option>
+    <option>I would prefer to be friends.</option>
+    <option>My feelings have changed, and I want to be honest.</option>
+    <option>I would rather explain in my own words.</option>
+   </select>
+   <label for="message">Your message (optional)</label>
+   <textarea id="message" placeholder="Share only what you feel comfortable sharing..."></textarea>
+   <div class="actions"><button class="btn btn-dark" type="submit">Continue to WhatsApp ↗</button><button class="btn btn-soft" id="clearForm" type="button">Clear response</button></div>
+   <p class="note">Nothing is sent automatically or saved by this page. The button opens WhatsApp with a draft you can review before sending. You can also choose not to respond; that choice will be respected.</p>
+  </form>
+ </div>
+</section>
+</main>
+<footer>Written with sincerity for <strong>Mercy</strong> · Love should be freely chosen, never pressured.</footer>
+<script>
+const form=document.getElementById('replyForm');
+form.addEventListener('submit',function(e){
+ e.preventDefault();
+ const feeling=document.getElementById('feeling').value;
+ const message=document.getElementById('message').value.trim();
+ let draft='Hi, I read your letter. I want to share my side honestly.\\n\\n'+feeling;
+ if(message)draft+='\\n\\nWhat I want you to understand: '+message;
+ draft+='\\n\\nPlease hear my feelings respectfully.';
+ window.open('https://wa.me/97451231379?text='+encodeURIComponent(draft),'_blank','noopener,noreferrer');
+});
+document.getElementById('clearForm').addEventListener('click',()=>{form.reset();document.getElementById('message').focus();});
+</script>
 </body>
 </html>
